@@ -1,52 +1,61 @@
-﻿using System;
+﻿//Evan Schober
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment4
+namespace cis237assignment3
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //Create a new droid collection and set the size of it to 100.
-            IDroidCollection droidCollection = new DroidCollection(100);
+            //Instantiate the user interface.
+            UserInterface ui = new UserInterface();
 
-            //Create a user interface and pass the droidCollection into it as a dependency
-            UserInterface userInterface = new UserInterface(droidCollection);
+            //Instantiate the droid storage array.
+            Droid[] DroidInventory = new Droid[100];
 
-            //Display the main greeting for the program
-            userInterface.DisplayGreeting();
+            //Output Program Header
+            ui.Output("************************************************************" + Environment.NewLine +
+            "******                 Jawa Droid Sales               ******" + Environment.NewLine +
+            "*******           Droid Inventory Management         *******" + Environment.NewLine +
+            "************************************************************" + Environment.NewLine);
 
-            //Display the main menu for the program
-            userInterface.DisplayMainMenu();
+            int choice = ui.MainMenu();
 
-            //Get the choice that the user makes
-            int choice = userInterface.GetMenuChoice();
-
-            //While the choice is not equal to 3, continue to do work with the program
-            while (choice != 3)
+            while (choice != 5)
             {
-                //Test which choice was made
                 switch (choice)
                 {
-                    //Choose to create a droid
                     case 1:
-                        userInterface.CreateDroid();
+                        //Output the full list of available droids.
+                        ui.Output(DroidCollection.GetPrintString(DroidInventory));
+                        choice = ui.MainMenu();
                         break;
-
-                    //Choose to Print the droid
                     case 2:
-                        userInterface.PrintDroidList();
+                        //Add item to DroidInventory
+                        ui.AddItem(DroidInventory);
+                        choice = ui.MainMenu();
+                        break;
+                    case 3:
+                        //Sort droids by type
+                        choice = ui.MainMenu();
+                        break;
+                    case 4:
+                        //Sort droids by total cost
+                        choice = ui.MainMenu();
+                        break;
+                    default:
+                        //Output the error if there is a numerical input that is not 1-3
+                        ui.Output("Error: Please enter valid numeric entry (1-3)");
+                        choice = ui.MainMenu();
                         break;
                 }
-                //Re-display the menu, and re-prompt for the choice
-                userInterface.DisplayMainMenu();
-                choice = userInterface.GetMenuChoice();
             }
-
-
+            //If UI input = 3 display farewell and close the program
+            ui.Output("Goodbye!");
         }
     }
 }

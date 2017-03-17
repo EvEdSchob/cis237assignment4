@@ -1,70 +1,137 @@
-﻿using System;
+﻿//Evan Schober
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment4
+namespace cis237assignment3
 {
-    //Abstract class that implements the IDroid interface
-    abstract class Droid : IDroid
+    public abstract class Droid : IDroid
     {
-        //some protected variables for the class
-        protected string material;
-        protected string model;
-        protected string color;
+        //Variables
+        private string _material;
+        private string _model;
+        private string _color;
+        private decimal _modelCost;
+        private decimal _baseCost;
+        private decimal _totalCost;
 
-        protected decimal baseCost;
-        protected decimal totalCost;
 
-        //The public property for TotalCost
+        //Properties
+        string Material
+        {
+            get { return _material; }
+            set { _material = value; }
+        }
+
+        string Model
+        {
+            get { return _model; }
+            set { _model = value; }
+        }
+
+        string Color
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
+
+        decimal BaseCost
+        {
+            get { return _baseCost; }
+            set { _baseCost = value; }
+        }
+
         public decimal TotalCost
         {
-            get { return totalCost; }
-            set { totalCost = value; }
+            get { return _totalCost; }
+            set { _totalCost = value; }
         }
 
-        //Constructor that takes the main 3 parameters shared amongst all 4 types of droids
+        //Constructors
         public Droid(string Material, string Model, string Color)
         {
-            this.material = Material;
-            this.model = Model;
-            this.color = Color;
+            _material = Material;
+            _model = Model;
+            _color = Color;
+            CalculateTotalCost();
         }
 
-        //Virtual method that can be overridden in the derived classes if needed.
-        //This implementation calculates the cost based on the material used for the droid
-        protected virtual void CalculateBaseCost()
+        //Methods
+        private decimal CalculateBaseCost()
         {
-            switch (this.material)
+            switch(Model)
             {
-                case "Carbonite":
-                    this.baseCost = 100.00m;
+                case "Protocol":
+                    _baseCost += 1500;
                     break;
-
-                case "Vanadium":
-                    this.baseCost = 120.00m;
+                case "Utility":
+                    _baseCost += 2000;
                     break;
-
-                case "Quadranium":
-                    this.baseCost = 150.00m;
+                case "Janitorial":
+                    _baseCost += 1575;
                     break;
-
-                default:
-                    this.baseCost = 50.00m;
+                case "Astromech":
+                    _baseCost += 1750;
                     break;
             }
+            switch(Material)
+            {
+
+                case "Durasteel":
+                    _baseCost += 100;
+                    break;
+                case "Agrinium":
+                    _baseCost += 150;
+                    break;
+                case "Inoxium":
+                    _baseCost += 175;
+                    break;
+                case "Laminanium":
+                    _baseCost += 200;
+                    break;
+                case "Neuranium":
+                    _baseCost += 300;
+                    break;
+            }
+            return _baseCost;
         }
 
-        //Abstract method that MUST be overriden in the derived class to calculate the total cost
-        public abstract void CalculateTotalCost();
+        public virtual void CalculateTotalCost()
+        {
+            _totalCost = CalculateBaseCost();
+        }
 
-        //Overriden toString method that will return a string representing the basic information for any droid
         public override string ToString()
         {
-            return "Material: " + this.material + Environment.NewLine +
-                    "Model: " + this.model + Environment.NewLine +
-                    "Color: " + this.color + Environment.NewLine;
+            string returnString = "";
+            returnString += _color + " " + _model + " droid: Made of " + MaterialDescription() + _material + ". ";
+            return returnString;
+        }
+
+        private string MaterialDescription()
+        {
+            //"Druasteel" Impact resistant
+            //"Agrinium" Durable and lightweight
+            //"Inoxium" Corrosion resistant
+            //"Laminanium" Self-repairing
+            //"Neuranium" Radiation resistant
+            switch (Material)
+            {
+                case "Durasteel":
+                    return "impact resistant ";
+                case "Agrinium":
+                    return "durable and lightweight ";
+                case "Inoxium":
+                    return "corrosion resistant ";
+                case "Laminanium":
+                    return "self-repairing ";
+                case "Neuranium":
+                    return "radiation resistant";
+                default:
+                    return "";
+            }
         }
     }
 }

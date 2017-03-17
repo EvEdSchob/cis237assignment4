@@ -1,128 +1,71 @@
-﻿using System;
+﻿//Evan Schober
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment4
+namespace cis237assignment3
 {
-    //Class Droid Collection implements the IDroidCollection interface.
-    //All methods declared in the Interface must be implemented in this class 
-    class DroidCollection : IDroidCollection
+    static class DroidCollection
     {
-        //Private variable to hold the collection of droids
-        private IDroid[] droidCollection;
-        //Private variable to hold the length of the Collection
-        private int lengthOfCollection;
-
-        //Constructor that takes in the size of the collection.
-        //It sets the size of the internal array that will be used.
-        //It also sets the length of the collection to zero since nothing is added yet.
-        public DroidCollection(int sizeOfCollection)
+        //Protocol contstructor
+        public static void Add(string Material, string Model, string Color, int NumberOfLanguages, Droid[] DroidInventory)
         {
-            //Make new array for the collection
-            droidCollection = new IDroid[sizeOfCollection];
-            //set length of collection to 0
-            lengthOfCollection = 0;
+            IDroid NewProtocol = new Protocol(Material, Model, Color, NumberOfLanguages);
+            AddDroid(NewProtocol, DroidInventory);
         }
 
-        //The Add method for a Protocol Droid. The parameters passed in match those needed for a protocol droid
-        public bool Add(string Material, string Model, string Color, int NumberOfLanguages)
+        //Utility constructor
+        public static void Add(string Material, string Model, string Color, bool ToolBox, bool ComputerConnection, bool Arm, Droid[] DroidInventory)
         {
-            //If there is room to add the new droid
-            if (lengthOfCollection < (droidCollection.Length - 1))
-            {
-                //Add the new droid. Note that the droidCollection is of type IDroid, but the droid being stored is
-                //of type Protocol Droid. This is okay because of Polymorphism.
-                droidCollection[lengthOfCollection] = new ProtocolDroid(Material, Model, Color, NumberOfLanguages);
-                //Increase the length of the collection
-                lengthOfCollection++;
-                //return that it was successful
-                return true;
-            }
-            //Else, there is no room for the droid
-            else
-            {
-                //Return false
-                return false;
-            }
+            IDroid NewUtility = new Utility(Material, Model, Color, ToolBox, ComputerConnection, Arm);
+            AddDroid(NewUtility, DroidInventory);
         }
 
-        //The Add method for a Utility droid. Code is the same as the above method except for the type of droid being created.
-        //The method can be redeclared as Add since it takes different parameters. This is called method overloading.
-        public bool Add(string Material, string Model, string Color, bool HasToolBox, bool HasComputerConnection, bool HasArm)
+        //Janitorial constructor
+        public static void Add(string Material, string Model, string Color, bool ToolBox, bool ComputerConnection, bool Arm, bool TrashCompactor, bool Vacuum, Droid[] DroidInventory)
         {
-            if (lengthOfCollection < (droidCollection.Length - 1))
-            {
-                droidCollection[lengthOfCollection] = new UtilityDroid(Material, Model, Color, HasToolBox, HasComputerConnection, HasArm);
-                lengthOfCollection++;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            IDroid NewJanitorial = new Janitorial(Material, Model, Color, ToolBox, ComputerConnection, Arm, TrashCompactor, Vacuum);
+            AddDroid(NewJanitorial, DroidInventory);
         }
 
-        //The Add method for a Janitor droid. Code is the same as the above method except for the type of droid being created.
-        public bool Add(string Material, string Model, string Color, bool HasToolBox, bool HasComputerConnection, bool HasArm, bool HasTrashCompactor, bool HasVaccum)
+        //Astromech constructor
+        public static void Add(string Material, string Model, string Color, bool ToolBox, bool ComputerConnection, bool Arm, bool FireExtinguisher, int NumberOfShips, Droid[] DroidInventory)
         {
-            if (lengthOfCollection < (droidCollection.Length - 1))
-            {
-                droidCollection[lengthOfCollection] = new JanitorDroid(Material, Model, Color, HasToolBox, HasComputerConnection, HasArm, HasTrashCompactor, HasVaccum);
-                lengthOfCollection++;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            IDroid NewAstromech = new Astromech(Material, Model, Color, ToolBox, ComputerConnection, Arm, FireExtinguisher, NumberOfShips);
+            AddDroid(NewAstromech, DroidInventory);
         }
 
-        //The Add method for a Astromech droid. Code is the same as the above method except for the type of droid being created.
-        public bool Add(string Material, string Model, string Color, bool HasToolBox, bool HasComputerConnection, bool HasArm, bool HasFireExtinguisher, int NumberOfShips)
+
+        //Adds  NewDroid to the end of the droidInventory array
+        private static void AddDroid(IDroid NewDroid, IDroid[] DroidInventory)
         {
-            if (lengthOfCollection < (droidCollection.Length - 1))
+            int x = 0;
+            while (DroidInventory[x] != null)
             {
-                droidCollection[lengthOfCollection] = new AstromechDroid(Material, Model, Color, HasToolBox, HasComputerConnection, HasArm, HasFireExtinguisher, NumberOfShips);
-                lengthOfCollection++;
-                return true;
+                x++;
             }
-            else
-            {
-                return false;
-            }
+            DroidInventory[x] = NewDroid;
         }
 
-        //The last method that must be implemented due to implementing the interface.
-        //This method iterates through the list of droids and creates a printable string that could
-        //be either printed to the screen, or sent to a file.
-        public string GetPrintString()
-        {
-            //Declare the return string
-            string returnString = "";
 
-            //For each droid in the droidCollection
-            foreach (IDroid droid in droidCollection)
+        //Creates an output string of all items in the array
+        //and returns it to the method called it
+        public static string GetPrintString(Droid[] DroidInventory)
+        {
+            string outputString = "";
+
+            foreach (Droid droid in DroidInventory)
             {
-                //If the droid is not null (It might be since the array may not be full)
                 if (droid != null)
                 {
-                    //Calculate the total cost of the droid. Since we are using inheritance and Polymorphism
-                    //the program will automatically know which version of CalculateTotalCost it needs to call based
-                    //on which particular type it is looking at during the foreach loop.
-                    droid.CalculateTotalCost();
-                    //Create the string now that the total cost has been calculated
-                    returnString += "******************************" + Environment.NewLine;
-                    returnString += droid.ToString() + Environment.NewLine + Environment.NewLine;
-                    returnString += "Total Cost: " + droid.TotalCost.ToString("C") + Environment.NewLine;
-                    returnString += "******************************" + Environment.NewLine;
-                    returnString += Environment.NewLine;
+                    //Concantonate to outputString
+                    outputString += droid.ToString() +
+                        Environment.NewLine;
                 }
             }
-
-            //return the completed string
-            return returnString;
+            return outputString;
         }
     }
 }
