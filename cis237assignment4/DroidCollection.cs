@@ -51,18 +51,68 @@ namespace cis237assignment4
 
         public static void TypeSort(Droid[] DroidInventory)
         {
+            int x = 0; //Index for various counters
+            int LastItem = 0; //Stores index of final item in the array
+            //Create DroidStack instances for each type of droid
             DroidStack<Protocol> ProtocolStack = new DroidStack<Protocol>();
             DroidStack<Utility> UtilityStack = new DroidStack<Utility>();
             DroidStack<Janitorial> JanitorialStack = new DroidStack<Janitorial>();
             DroidStack<Astromech> AstromechStack = new DroidStack<Astromech>();
 
-            DroidQueue<Droid> DroidQueue = new DroidQueue<Droid>();
+            //Create DroidQueue instance
+            DroidQueue<Droid> DroidsQueue = new DroidQueue<Droid>();
 
-            for(int i = 0; i == DroidInventory.Length; i++)
+            while (DroidInventory[x] != null)
             {
-
+                LastItem = x++;
             }
 
+            //For loop sorts Droids out to the appropriate queue.
+            for(int i = 0; i <= LastItem; i++)
+            {
+                switch(DroidInventory[i].Model)
+                {
+                    case "Protocol":
+                        ProtocolStack.Push((Protocol)DroidInventory[i]);
+                        break;
+                    case "Utility":
+                        UtilityStack.Push((Utility)DroidInventory[i]);
+                        break;
+                    case "Janitorial":
+                        JanitorialStack.Push((Janitorial)DroidInventory[i]);
+                        break;
+                    case "Astromech":
+                        AstromechStack.Push((Astromech)DroidInventory[i]);
+                        break;
+                }
+            }
+            //Pops Protocol droids off of the stack and places them in the queue
+            while(!ProtocolStack.IsEmpty)
+            {
+                DroidsQueue.Queue(ProtocolStack.Pop());
+            }
+            //Pops Utility droids off of the stack and places them in the queue
+            while (!UtilityStack.IsEmpty)
+            {
+                DroidsQueue.Queue(UtilityStack.Pop());
+            }
+            //Pops Janitorial droids off of the stack and places them in the queue
+            while (!JanitorialStack.IsEmpty)
+            {
+                DroidsQueue.Queue(JanitorialStack.Pop());
+            }
+            //Pops Astromech droids off of the stack and places them in the queue
+            while (!AstromechStack.IsEmpty)
+            {
+                DroidsQueue.Queue(AstromechStack.Pop());
+            }
+            //Dequeues Droids and places them back in the DroidInventory array
+            x = 0; //Reset index
+            while(!DroidsQueue.IsEmpty)
+            {
+                DroidInventory[x] = DroidsQueue.Dequeue();
+                x++;
+            }
         }
 
         public static void CostSort()
