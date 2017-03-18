@@ -42,10 +42,12 @@ namespace cis237assignment3
                     case 3:
                         //Sort droids by type
                         choice = ui.MainMenu();
+                        ui.Output(DroidCollection.GetPrintString(DroidInventory));
                         break;
                     case 4:
                         //Sort droids by total cost
                         choice = ui.MainMenu();
+                        ui.Output(DroidCollection.GetPrintString(DroidInventory));
                         break;
                     default:
                         //Output the error if there is a numerical input that is not 1-3

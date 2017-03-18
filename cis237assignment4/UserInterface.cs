@@ -147,14 +147,9 @@ namespace cis237assignment3
             return selection;
         }
 
-
+        //*****************************************
         //Methods with boolean input
-        private bool verifyDroid()
-        {
-            Console.WriteLine("Is the information for this droid correct? (y/n)");
-            return boolInput();
-        }
-
+        //*****************************************
         //Boolean Methods for Utility droids
         private bool toolbox()
         {
