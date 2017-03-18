@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment3
+namespace cis237assignment4
 {
     public abstract class Droid : IDroid
     {
@@ -25,7 +25,7 @@ namespace cis237assignment3
             set { _material = value; }
         }
 
-        string Model
+        public string Model
         {
             get { return _model; }
             set { _model = value; }
@@ -132,6 +132,11 @@ namespace cis237assignment3
                 default:
                     return "";
             }
+        }
+
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

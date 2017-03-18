@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace cis237assignment4
 {
-    class Queue<T>
-    { 
+    class DroidStack<T>
+    {
         //Make node class
         protected class Node
         {
@@ -39,31 +39,27 @@ namespace cis237assignment4
             }
         }
 
-        public void AddToBack(T Data)
+        public void Push(T Data)
         {
-            //Make a pointer to the tail called old tail
-            Node oldTail = _tail;
-            //Make a new node and assign it to the tail
-            _tail = new Node();
-            //Assign the data and set the next pointer
-            _tail.Data = Data;
-            _tail.Next = null;
-
-            //Check to see if the list is empty. If so, make the head
-            //point to the same location as the new tail
-            if (IsEmpty)
+            //Make a new variable to also reference the head of the list
+            Node oldHead = _head;
+            //Make a new node and assign it to the head variable
+            _head = new Node();
+            //Set the data on the new node
+            _head.Data = Data;
+            //Make the next property of the new node oint to the old head
+            _head.Next = oldHead;
+            //Increment the size of the list
+            _size++;
+            //Ensure that if we are adding an item to an empty list
+            //that the tail will be 
+            if (_size == 1)
             {
-                _head = _tail;
-            }
-            //We need to to take the oldTail and make it's next
-            //property point ot the tail that we just created
-            else
-            {
-                oldTail.Next = _tail;
+                _tail = _head;
             }
         }
 
-        public T RemoveFromFront()
+        public T Pop()
         {
             //If it's empty throw an error
             if (IsEmpty)
@@ -83,23 +79,6 @@ namespace cis237assignment4
                 _tail = null;
             }
             return returnData;
-        }
-
-
-        public void Display()
-        {
-            Console.WriteLine("The list is: ");
-            //Setup a currentNode to walk the list
-            //start it at the head node
-            Node currentNode = _head;
-            //Loop through the nodes until we hit null
-            //which will signify the end of the list
-            while (currentNode != null)
-            {
-                Console.WriteLine(currentNode.Data);
-                //Move to next node
-                currentNode = currentNode.Next;
-            }
         }
     }
 }

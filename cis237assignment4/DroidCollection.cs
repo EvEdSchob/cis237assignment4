@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237assignment3
+namespace cis237assignment4
 {
     static class DroidCollection
     {
@@ -49,6 +49,26 @@ namespace cis237assignment3
             DroidInventory[x] = NewDroid;
         }
 
+        public static void TypeSort(Droid[] DroidInventory)
+        {
+            DroidStack<Protocol> ProtocolStack = new DroidStack<Protocol>();
+            DroidStack<Utility> UtilityStack = new DroidStack<Utility>();
+            DroidStack<Janitorial> JanitorialStack = new DroidStack<Janitorial>();
+            DroidStack<Astromech> AstromechStack = new DroidStack<Astromech>();
+
+            DroidQueue<Droid> DroidQueue = new DroidQueue<Droid>();
+
+            for(int i = 0; i == DroidInventory.Length; i++)
+            {
+
+            }
+
+        }
+
+        public static void CostSort()
+        {
+
+        }
 
         //Creates an output string of all items in the array
         //and returns it to the method called it

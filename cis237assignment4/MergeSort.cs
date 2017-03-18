@@ -8,6 +8,6 @@ namespace cis237assignment4
 {
     class MergeSort
     {
-        //This will be the mergesort Class
+        //This will be the MergeSort class
     }
 }
