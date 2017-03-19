@@ -134,9 +134,13 @@ namespace cis237assignment4
             }
         }
 
-        public int CompareTo(object obj)
+        public virtual int CompareTo(Droid thatDroid)
         {
-            throw new NotImplementedException();
+            if (TotalCost < thatDroid.TotalCost)
+                return -1;
+            if (TotalCost == thatDroid.TotalCost)
+                return 0;
+            return 1;
         }
     }
 }

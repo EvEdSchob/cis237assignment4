@@ -44,5 +44,10 @@ namespace cis237assignment4
             returnString += " That can speak " + _numberOfLanguages + " language(s)";
             return returnString;
         }
+
+        public override int CompareTo(Droid thatDroid)
+        {
+            return base.CompareTo(thatDroid);
+        }
     }
 }

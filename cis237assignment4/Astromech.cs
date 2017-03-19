@@ -45,5 +45,10 @@ namespace cis237assignment4
             returnString += " Is capable of handling " + _numberOfShips + " ship(s).";
             return returnString;
         }
+
+        public override int CompareTo(Droid thatDroid)
+        {
+            return base.CompareTo(thatDroid);
+        }
     }
 }

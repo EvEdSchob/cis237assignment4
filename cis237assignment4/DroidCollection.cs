@@ -51,8 +51,6 @@ namespace cis237assignment4
 
         public static void TypeSort(Droid[] DroidInventory)
         {
-            int x = 0; //Index for various counters
-            int LastItem = 0; //Stores index of final item in the array
             //Create DroidStack instances for each type of droid
             DroidStack<Protocol> ProtocolStack = new DroidStack<Protocol>();
             DroidStack<Utility> UtilityStack = new DroidStack<Utility>();
@@ -62,13 +60,8 @@ namespace cis237assignment4
             //Create DroidQueue instance
             DroidQueue<Droid> DroidsQueue = new DroidQueue<Droid>();
 
-            while (DroidInventory[x] != null)
-            {
-                LastItem = x++;
-            }
-
             //For loop sorts Droids out to the appropriate queue.
-            for(int i = 0; i <= LastItem; i++)
+            for(int i = 0; i < FillLength(DroidInventory); i++)
             {
                 switch(DroidInventory[i].Model)
                 {
@@ -107,7 +100,7 @@ namespace cis237assignment4
                 DroidsQueue.Queue(AstromechStack.Pop());
             }
             //Dequeues Droids and places them back in the DroidInventory array
-            x = 0; //Reset index
+            int x = 0; //Index Variable
             while(!DroidsQueue.IsEmpty)
             {
                 DroidInventory[x] = DroidsQueue.Dequeue();
@@ -115,11 +108,35 @@ namespace cis237assignment4
             }
         }
 
-        public static void CostSort()
+        public static void CostSort(Droid[] DroidInventory)
         {
+            Droid[] SortArray = new Droid[FillLength(DroidInventory)];
+            int x = 0; //Index Variable
 
+            while (DroidInventory[x] != null)
+            {
+                SortArray[x] = DroidInventory[x];
+                x++;
+            }
+
+            MergeSort<Droid>.Sort(SortArray);
+            x = 0;
+            foreach(Droid droid in SortArray)
+            {
+                DroidInventory[x] = SortArray[x];
+                x++;
+            }
         }
 
+        private static int FillLength(Droid[] DroidInventory)
+        {
+            int x = 0; //Index Variable
+            while (DroidInventory[x] != null)
+            {
+                x++;
+            }
+            return x;
+        }
         //Creates an output string of all items in the array
         //and returns it to the method called it
         public static string GetPrintString(Droid[] DroidInventory)

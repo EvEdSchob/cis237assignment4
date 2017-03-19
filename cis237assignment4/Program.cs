@@ -49,7 +49,7 @@ namespace cis237assignment4
                         break;
                     case 4:
                         //Sort droids by total cost
-                        DroidCollection.CostSort();
+                        DroidCollection.CostSort(DroidInventory);
                         choice = ui.MainMenu();
                         break;
                     default:

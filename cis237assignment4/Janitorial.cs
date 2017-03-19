@@ -48,5 +48,10 @@ namespace cis237assignment4
             return returnString;
         }
 
+        public override int CompareTo(Droid thatDroid)
+        {
+            return base.CompareTo(thatDroid);
+        }
+
     }
 }

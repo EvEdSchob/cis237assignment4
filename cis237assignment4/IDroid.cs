@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cis237assignment4
 {
-    interface IDroid : IComparable
+    interface IDroid : IComparable<Droid>
     {
         //Methods to be implemented.
         void CalculateTotalCost();
