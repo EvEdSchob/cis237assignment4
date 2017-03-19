@@ -4,7 +4,7 @@
 
 ## Author
 
-David Barnes
+Evan Schober
 
 ## Description
 
@@ -89,6 +89,7 @@ Be sure to think about what the time complexity for the bucket sort will be. Thi
 ## Outside Resources Used
 
 Algorithms book by Sedgewick and Wayne
+StackExchange & MSDN (CompareTo)
 
 ## Known Problems, Issues, And/Or Errors in the Program
 

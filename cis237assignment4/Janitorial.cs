@@ -33,6 +33,7 @@ namespace cis237assignment4
                 TotalCost += 50;
         }
 
+        //Override with Janitorial specific ToString()
         public override string ToString()
         {
             string returnString = "";
@@ -48,6 +49,7 @@ namespace cis237assignment4
             return returnString;
         }
 
+        //Default CompareTo() defined in Droid is sufficient
         public override int CompareTo(Droid thatDroid)
         {
             return base.CompareTo(thatDroid);

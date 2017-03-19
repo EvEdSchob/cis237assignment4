@@ -46,6 +46,7 @@ namespace cis237assignment4
             return returnString;
         }
 
+        //Default CompareTo() defined in Droid is sufficient
         public override int CompareTo(Droid thatDroid)
         {
             return base.CompareTo(thatDroid);

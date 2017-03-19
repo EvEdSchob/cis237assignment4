@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Evan Schober
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,6 @@ namespace cis237assignment4
         protected class Node
         {
             public T Data { get; set; }
-
             public Node Next { get; set; }
         }
 
@@ -33,10 +33,7 @@ namespace cis237assignment4
 
         public int Size
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
         }
 
         public void Push(T Data)

@@ -60,7 +60,7 @@ namespace cis237assignment4
             //Create DroidQueue instance
             DroidQueue<Droid> DroidsQueue = new DroidQueue<Droid>();
 
-            //For loop sorts Droids out to the appropriate queue.
+            //For loop sorts Droids and pushes them onto the appropriate stack.
             for(int i = 0; i < FillLength(DroidInventory); i++)
             {
                 switch(DroidInventory[i].Model)
@@ -108,18 +108,22 @@ namespace cis237assignment4
             }
         }
 
+        //Initiates "Sort by price" routines
         public static void CostSort(Droid[] DroidInventory)
         {
+            //Create an array equal to the size of the filled portion of DroidInventory
             Droid[] SortArray = new Droid[FillLength(DroidInventory)];
-            int x = 0; //Index Variable
 
+            //Copy non-null values from DroidInventory to the new array
+            int x = 0; //Index Variable            
             while (DroidInventory[x] != null)
             {
                 SortArray[x] = DroidInventory[x];
                 x++;
             }
-
+            //Pass SortArray by reference to the sort algorithm
             MergeSort<Droid>.Sort(SortArray);
+            //Copy the sorted array back into DroidInventory
             x = 0;
             foreach(Droid droid in SortArray)
             {
@@ -128,6 +132,7 @@ namespace cis237assignment4
             }
         }
 
+        //Returns the total number of filled indicies in DroidInventory
         private static int FillLength(Droid[] DroidInventory)
         {
             int x = 0; //Index Variable
@@ -137,6 +142,7 @@ namespace cis237assignment4
             }
             return x;
         }
+
         //Creates an output string of all items in the array
         //and returns it to the method called it
         public static string GetPrintString(Droid[] DroidInventory)

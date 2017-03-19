@@ -214,7 +214,6 @@ namespace cis237assignment4
             {
                 Console.WriteLine("Protocol droids must be able to speak at least one language.");
                 x = intInput();
-                
             }
             return x;
         }
@@ -231,7 +230,6 @@ namespace cis237assignment4
             {
                 Console.WriteLine("Atromech droids must be able to tend to at least one ship.");
                 x = intInput();
-
             }
             return x;
         }
